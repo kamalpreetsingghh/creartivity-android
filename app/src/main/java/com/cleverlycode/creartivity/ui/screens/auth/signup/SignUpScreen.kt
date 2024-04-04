@@ -9,7 +9,9 @@ import androidx.navigation.NavController
 import com.cleverlycode.creartivity.ui.composables.InputText
 
 @Composable
-fun SignUpScreen(navController: NavController) {
+fun SignUpScreen(
+    navController: NavController,
+) {
     Column(modifier = Modifier.padding(4.dp)) {
         InputText(value = "", placeholder = "First Name", onChange = {})
         InputText(value = "", placeholder = "Last Name", onChange = {})
