@@ -3,13 +3,13 @@ package com.cleverlycode.creartivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.cleverlycode.creartivity.ui.composables.BottomNavItem
+import com.cleverlycode.creartivity.ui.composables.BottomNavigation
 import com.cleverlycode.creartivity.ui.theme.CreartivityTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,11 +19,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CreartivityTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                val navController = rememberNavController()
+                val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+
+                val navbarItems = listOf(
+                    BottomNavItem.Post,
+                    BottomNavItem.Profile
+                )
+
+                Scaffold(
+                    bottomBar = {
+                        if (currentDestination != null) {
+                            if (currentDestination.route == "home" || currentDestination.route == "profile") {
+                                BottomNavigation(
+                                    navbarItems = navbarItems,
+                                    navController = navController
+                                )
+                            }
+                        }
+                    }
                 ) {
-                    NavigationGraph(navController = rememberNavController())
+                    it.calculateBottomPadding()
+                    NavigationGraph(navController = navController)
                 }
             }
         }
