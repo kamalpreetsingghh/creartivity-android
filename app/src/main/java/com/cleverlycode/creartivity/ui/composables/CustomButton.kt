@@ -21,15 +21,15 @@ fun CustomButton(
     enabled: Boolean = true,
     icon: ImageVector? = null,
     contentDescription: String? = null,
-    color: Color? = null,
-    textColor: Color? = null
+    color: Color = Color.Black,
+    textColor: Color = MaterialTheme.colorScheme.onPrimary
 ) {
     Button(
         modifier = modifier.fillMaxWidth(),
         contentPadding = PaddingValues(12.dp),
         onClick = onClick,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+        colors = ButtonDefaults.buttonColors(containerColor = color),
         elevation = null
     ) {
         if (icon != null) {
@@ -40,7 +40,7 @@ fun CustomButton(
         }
         Text(
             text = label,
-            color = textColor ?: MaterialTheme.colorScheme.onPrimary
+            color = textColor
         )
     }
 }
