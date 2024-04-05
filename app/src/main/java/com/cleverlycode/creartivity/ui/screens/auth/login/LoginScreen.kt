@@ -45,7 +45,7 @@ fun LoginScreen(
 
         InputText(
             value = "",
-            placeholder = "Email",
+            placeholder = stringResource(id = R.string.label_email),
             onValueChange = {}
         )
 
@@ -53,7 +53,7 @@ fun LoginScreen(
 
         InputText(
             value = "",
-            placeholder = "Password",
+            placeholder = stringResource(id = R.string.label_password),
             onValueChange = {}
         )
 

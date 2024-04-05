@@ -1,9 +1,9 @@
 package com.cleverlycode.creartivity.ui.screens.auth.signup
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -28,54 +28,72 @@ import com.cleverlycode.creartivity.ui.theme.CreartivityTheme
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Lets get you started.", fontSize = 28.sp, fontWeight = FontWeight.SemiBold)
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Text(
+            text = "Lets get you started.",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = "Hi there, Embark on a journey of boundless creativity with AI.")
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        InputText(
-            value = "",
-            placeholder = "First Name",
-            onValueChange = {}
+        Text(
+            text = "Hi there, Embark on a journey of boundless creativity with AI.",
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         InputText(
             value = "",
-            placeholder = "Last Name",
-            onValueChange = {}
-        )
-
-        Spacer(Modifier.height(12.dp))
-
-        InputText(
-            value = "",
-            placeholder = "Email",
-            onValueChange = {}
-        )
-
-        Spacer(Modifier.height(12.dp))
-
-        InputText(
-            value = "",
-            placeholder = "Password",
+            placeholder = stringResource(id = R.string.label_first_name),
             onValueChange = {}
         )
 
         Spacer(Modifier.height(16.dp))
+
+        InputText(
+            value = "",
+            placeholder = stringResource(id = R.string.label_last_name),
+            onValueChange = {}
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        InputText(
+            value = "",
+            placeholder = stringResource(id = R.string.label_email),
+            onValueChange = {}
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        InputText(
+            value = "",
+            placeholder = stringResource(id = R.string.label_password),
+            onValueChange = {}
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        InputText(
+            value = "",
+            placeholder = stringResource(id = R.string.label_confirm_password),
+            onValueChange = {}
+        )
+
+        Spacer(Modifier.height(20.dp))
 
         CustomButton(
             label = stringResource(R.string.label_create_account),
@@ -83,7 +101,7 @@ fun SignUpScreen(
             color = Color.Black
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(36.dp))
 
         AnnotatedClickableText(
             text = stringResource(R.string.label_sign_in_text),
