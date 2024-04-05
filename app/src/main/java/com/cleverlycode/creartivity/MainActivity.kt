@@ -3,9 +3,12 @@ package com.cleverlycode.creartivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cleverlycode.creartivity.ui.composables.BottomNavItem
@@ -39,8 +42,10 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) {
-                    it.calculateBottomPadding()
-                    NavigationGraph(navController = navController)
+                    NavigationGraph(
+                        navController = navController,
+                        modifier = Modifier.padding(it)
+                    )
                 }
             }
         }
@@ -51,6 +56,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     CreartivityTheme {
-        NavigationGraph(navController = rememberNavController())
+        NavigationGraph(
+            navController = rememberNavController(),
+            modifier = Modifier.padding(0.dp)
+        )
     }
 }

@@ -3,6 +3,7 @@ package com.cleverlycode.creartivity.ui.composables
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ fun CustomButton(
         contentPadding = PaddingValues(12.dp),
         onClick = onClick,
         enabled = enabled,
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
         elevation = null
     ) {
         if (icon != null) {

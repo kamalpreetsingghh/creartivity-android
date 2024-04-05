@@ -1,6 +1,7 @@
 package com.cleverlycode.creartivity
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,9 +12,16 @@ import com.cleverlycode.creartivity.ui.screens.root.home.HomeScreen
 import com.cleverlycode.creartivity.ui.screens.root.profile.ProfileScreen
 
 @Composable
-fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Home.route) {
-        navigation(startDestination = Login.route, route = Auth.route) {
+fun NavigationGraph(navController: NavHostController, modifier: Modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = Home.route,
+        modifier = modifier
+    ) {
+        navigation(
+            startDestination = Login.route,
+            route = Auth.route
+        ) {
             composable(route = Login.route) {
                 LoginScreen(navController = navController)
             }
