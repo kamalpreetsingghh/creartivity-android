@@ -1,15 +1,18 @@
 package com.cleverlycode.creartivity.ui.screens.auth.login
 
+import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cleverlycode.creartivity.R
+import com.cleverlycode.creartivity.data.repository.APIResponseStatus
 import com.cleverlycode.creartivity.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
+class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
     var loginUiState = mutableStateOf(LoginUiState())
         private set
 
@@ -39,11 +42,41 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
             loginUiState.value.copy(isPasswordVisible = !loginUiState.value.isPasswordVisible)
     }
 
-    fun onSignInClick() {
-        viewModelScope.launch {
-            val response = authRepository.login(email, password)
-            val x = response
+    fun onSignInClick(navigateToHome: () -> Unit) {
+        if(isValidSignInDetails()) {
+            viewModelScope.launch {
+                when (authRepository.login(email, password)) {
+                    APIResponseStatus.NOT_FOUND -> {
+                        loginUiState.value = loginUiState.value.copy(
+                            isEmailError = true,
+                            emailErrorMsgResId = R.string.error_email_not_found
+                        )
+                    }
+                    APIResponseStatus.UNAUTHORIZED -> {
+                        loginUiState.value = loginUiState.value.copy(
+                            isEmailError = true,
+                            emailErrorMsgResId = R.string.error_incorrect_credentials
+                        )
+                    }
+                    APIResponseStatus.SUCCESS -> {
+                        navigateToHome()
+                    }
+
+                    else -> {}
+                }
+            }
         }
+    }
+
+    private fun isValidSignInDetails(): Boolean {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            loginUiState.value = loginUiState.value.copy(
+                isEmailError = true,
+                emailErrorMsgResId = R.string.error_invalid_email
+            )
+            return false
+        }
+        return true
     }
 
     private fun enableOrDisableButton() {

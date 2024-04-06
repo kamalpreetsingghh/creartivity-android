@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AuthModule {
-    private const val BASE_URL = "https://creartivity-backend.onrender.com/api/users/"
+    private const val BASE_URL = "https://creartivity.onrender.com/api/users/"
 
     @Provides
     @Singleton

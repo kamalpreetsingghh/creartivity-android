@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.cleverlycode.creartivity.Home
 import com.cleverlycode.creartivity.R
 import com.cleverlycode.creartivity.SignUp
 import com.cleverlycode.creartivity.ui.composables.AnnotatedClickableText
@@ -101,7 +102,7 @@ fun LoginScreen(
 
         CustomButton(
             label = stringResource(R.string.label_sign_in),
-            onClick = { viewModel.onSignInClick() },
+            onClick = { viewModel.onSignInClick(navigateToHome = { navController.navigate(Home.route) }) },
             enabled = loginUiState.isButtonEnabled
         )
 
