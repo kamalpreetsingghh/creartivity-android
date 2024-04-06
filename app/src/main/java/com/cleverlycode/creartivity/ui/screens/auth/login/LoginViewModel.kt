@@ -5,15 +5,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleverlycode.creartivity.R
-import com.cleverlycode.creartivity.data.models.Login
 import com.cleverlycode.creartivity.data.repository.APIResponseStatus
 import com.cleverlycode.creartivity.data.repository.AuthRepository
+import com.cleverlycode.creartivity.data.repository.UserPreferencesRepository
+import com.cleverlycode.creartivity.domain.models.Login
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
+) : ViewModel() {
     var loginUiState = mutableStateOf(LoginUiState())
         private set
 
@@ -46,7 +50,8 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
     fun onSignInClick(navigateToHome: () -> Unit) {
         if (isValidSignInDetails()) {
             viewModelScope.launch {
-                when (authRepository.login(Login(email = email, password = password))) {
+                val response = authRepository.login(Login(email = email, password = password))
+                when (response.apiResponseStatus) {
                     APIResponseStatus.NOT_FOUND -> {
                         loginUiState.value = loginUiState.value.copy(
                             isEmailError = true,
@@ -62,6 +67,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
                     }
 
                     APIResponseStatus.SUCCESS -> {
+                        userPreferencesRepository.updateIsUserSignedIn(true)
                         navigateToHome()
                     }
 

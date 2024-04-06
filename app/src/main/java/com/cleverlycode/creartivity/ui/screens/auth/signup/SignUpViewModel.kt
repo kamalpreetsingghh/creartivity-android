@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleverlycode.creartivity.R
-import com.cleverlycode.creartivity.data.models.SignUp
 import com.cleverlycode.creartivity.data.repository.APIResponseStatus
 import com.cleverlycode.creartivity.data.repository.AuthRepository
+import com.cleverlycode.creartivity.domain.models.SignUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

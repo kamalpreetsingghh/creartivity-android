@@ -1,4 +1,4 @@
-package com.cleverlycode.creartivity.data.models
+package com.cleverlycode.creartivity.domain.models
 
 data class Login(
     val email: String,

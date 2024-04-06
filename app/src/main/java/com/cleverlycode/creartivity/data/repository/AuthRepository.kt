@@ -1,25 +1,28 @@
 package com.cleverlycode.creartivity.data.repository
 
-import com.cleverlycode.creartivity.data.models.Login
-import com.cleverlycode.creartivity.data.models.SignUp
 import com.cleverlycode.creartivity.data.remote.AuthService
 import com.cleverlycode.creartivity.data.remote.LoginRequest
 import com.cleverlycode.creartivity.data.remote.SignUpRequest
+import com.cleverlycode.creartivity.domain.models.Login
+import com.cleverlycode.creartivity.domain.models.LoginResponse
+import com.cleverlycode.creartivity.domain.models.SignUp
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(private val authService: AuthService) {
-    suspend fun login(login: Login): APIResponseStatus {
+    suspend fun login(login: Login): LoginResponse {
         val loginRequest = LoginRequest(email = login.email, password = login.password)
         val response = authService.login(loginRequest)
 
         val apiResponseStatus =
             APIResponseStatus.getByCode(response.code()) ?: APIResponseStatus.SUCCESS
 
-        if (response.isSuccessful) {
+        val user = if (response.isSuccessful) {
             response.body() ?: throw NullPointerException("User body is null")
+        } else {
+            null
         }
 
-        return apiResponseStatus
+        return LoginResponse(apiResponseStatus = apiResponseStatus, user = user)
     }
 
     suspend fun signup(signUp: SignUp): APIResponseStatus {

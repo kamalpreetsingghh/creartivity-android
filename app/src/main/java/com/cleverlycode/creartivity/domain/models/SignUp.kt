@@ -1,4 +1,4 @@
-package com.cleverlycode.creartivity.data.models
+package com.cleverlycode.creartivity.domain.models
 
 data class SignUp(
     val firstName: String,
