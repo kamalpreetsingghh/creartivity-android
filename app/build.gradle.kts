@@ -72,8 +72,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.49")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
@@ -83,4 +83,14 @@ dependencies {
 
     // Material 3
     implementation("androidx.compose.material3:material3:1.2.1")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Retrofit with Gson Converter
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 }

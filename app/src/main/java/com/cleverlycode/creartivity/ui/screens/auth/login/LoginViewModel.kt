@@ -2,11 +2,14 @@ package com.cleverlycode.creartivity.ui.screens.auth.login
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.cleverlycode.creartivity.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(): ViewModel() {
+class LoginViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
     var loginUiState = mutableStateOf(LoginUiState())
         private set
 
@@ -37,7 +40,10 @@ class LoginViewModel @Inject constructor(): ViewModel() {
     }
 
     fun onSignInClick() {
-
+        viewModelScope.launch {
+            val response = authRepository.login(email, password)
+            val x = response
+        }
     }
 
     private fun enableOrDisableButton() {
