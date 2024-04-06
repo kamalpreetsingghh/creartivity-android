@@ -84,6 +84,14 @@ fun SignUpScreen(
         Spacer(Modifier.height(16.dp))
 
         InputText(
+            value = signUpUiState.userName,
+            placeholder = stringResource(id = R.string.label_username),
+            onValueChange = { viewModel.onUserNameChange(newValue = it) }
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        InputText(
             value = signUpUiState.email,
             placeholder = stringResource(id = R.string.label_email),
             onValueChange = { viewModel.onEmailChange(newValue = it) },
@@ -136,7 +144,7 @@ fun SignUpScreen(
 
         CustomButton(
             label = stringResource(R.string.label_create_account),
-            onClick = { viewModel.onSignUpClick() },
+            onClick = { viewModel.onSignUpClick(navigateToLogin = { navController.navigate(Login.route) }) },
             enabled = signUpUiState.isButtonEnabled,
         )
 

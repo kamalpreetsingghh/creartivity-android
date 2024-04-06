@@ -11,6 +11,10 @@ data class SignUpUiState(
     val isLastNameError: Boolean = false,
     val lastNameErrorMsg: String = "",
 
+    val userName: String = "",
+    val isUserNameError: Boolean = false,
+    @StringRes val userNameErrorMsgResId: Int? = null,
+
     val email: String = "",
     val isEmailError: Boolean = false,
     @StringRes val emailErrorMsgResId: Int? = null,

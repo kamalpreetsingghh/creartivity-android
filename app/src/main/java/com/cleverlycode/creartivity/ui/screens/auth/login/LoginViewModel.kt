@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleverlycode.creartivity.R
+import com.cleverlycode.creartivity.data.models.Login
 import com.cleverlycode.creartivity.data.repository.APIResponseStatus
 import com.cleverlycode.creartivity.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,21 +44,23 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
     }
 
     fun onSignInClick(navigateToHome: () -> Unit) {
-        if(isValidSignInDetails()) {
+        if (isValidSignInDetails()) {
             viewModelScope.launch {
-                when (authRepository.login(email, password)) {
+                when (authRepository.login(Login(email = email, password = password))) {
                     APIResponseStatus.NOT_FOUND -> {
                         loginUiState.value = loginUiState.value.copy(
                             isEmailError = true,
                             emailErrorMsgResId = R.string.error_email_not_found
                         )
                     }
+
                     APIResponseStatus.UNAUTHORIZED -> {
                         loginUiState.value = loginUiState.value.copy(
                             isEmailError = true,
                             emailErrorMsgResId = R.string.error_incorrect_credentials
                         )
                     }
+
                     APIResponseStatus.SUCCESS -> {
                         navigateToHome()
                     }

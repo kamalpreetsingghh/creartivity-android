@@ -3,17 +3,24 @@ package com.cleverlycode.creartivity.ui.screens.auth.signup
 import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cleverlycode.creartivity.R
+import com.cleverlycode.creartivity.data.models.SignUp
+import com.cleverlycode.creartivity.data.repository.APIResponseStatus
+import com.cleverlycode.creartivity.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
     var signUpUiState = mutableStateOf(SignUpUiState())
         private set
 
     private val firstName get() = signUpUiState.value.firstName
     private val lastName get() = signUpUiState.value.lastName
+    private val userName get() = signUpUiState.value.userName
     private val email get() = signUpUiState.value.email
     private val password get() = signUpUiState.value.password
     private val confirmPassword get() = signUpUiState.value.confirmPassword
@@ -25,6 +32,11 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     fun onLastNameChange(newValue: String) {
         signUpUiState.value = signUpUiState.value.copy(lastName = newValue)
+        enableOrDisableButton()
+    }
+
+    fun onUserNameChange(newValue: String) {
+        signUpUiState.value = signUpUiState.value.copy(userName = newValue)
         enableOrDisableButton()
     }
 
@@ -55,9 +67,25 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         enableOrDisableButton()
     }
 
-    fun onSignUpClick() {
+    fun onSignUpClick(navigateToLogin: () -> Unit) {
         if (isValidSignUpDetails()) {
+            viewModelScope.launch {
+                val response = authRepository.signup(
+                    SignUp(
+                        firstName = firstName,
+                        lastName = lastName,
+                        userName = userName,
+                        email = email,
+                        password = password
+                    )
+                )
 
+                if (response == APIResponseStatus.SUCCESS) {
+                    navigateToLogin()
+                } else {
+
+                }
+            }
         }
     }
 
