@@ -6,6 +6,7 @@
     <string name="label_sign_in">Sign In</string>
     <string name="label_sign_up_text">Don\'t have an account?&#160;</string>
     <string name="label_sign_in_text">Already have an account?&#160;</string>
+    <string name="label_logout_text">Logout</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_first_name">First Name</string>
     <string name="label_last_name">Last Name</string>
