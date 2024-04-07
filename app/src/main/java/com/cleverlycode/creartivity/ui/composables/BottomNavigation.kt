@@ -7,13 +7,16 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.cleverlycode.creartivity.R
 
 @Composable
 fun BottomNavigation(
@@ -22,7 +25,8 @@ fun BottomNavigation(
     modifier: Modifier = Modifier,
 ) {
     NavigationBar(
-        modifier = modifier
+        modifier = modifier,
+        containerColor = colorResource(R.color.navbar_container)
     ) {
         val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
@@ -37,7 +41,11 @@ fun BottomNavigation(
                             contentDescription = item.name
                         )
                     }
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = colorResource(id = R.color.navbar_indicator),
+                    selectedIconColor = colorResource(R.color.navbar_selected_icon)
+                )
             )
         }
     }
