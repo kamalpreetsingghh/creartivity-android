@@ -8,8 +8,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -26,9 +29,15 @@ fun InputText(
     @StringRes errorMsgResId: Int? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     shape: Shape = RoundedCornerShape(8.dp),
-    singleLine: Boolean = true
+    singleLine: Boolean = true,
+    colors: TextFieldColors = TextFieldDefaults.colors(
+        focusedContainerColor = Color.White,
+        unfocusedContainerColor = Color.White,
+        focusedIndicatorColor = Color.Black
+    )
 ) {
     OutlinedTextField(
         value = value,
@@ -38,9 +47,11 @@ fun InputText(
         isError = isError,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = visualTransformation,
+        leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         shape = shape,
         singleLine = singleLine,
+        colors = colors
     )
 
     if (errorMsgResId != null) {
