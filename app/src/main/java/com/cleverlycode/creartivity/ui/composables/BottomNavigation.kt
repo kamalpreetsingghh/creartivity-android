@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -27,7 +28,7 @@ fun BottomNavigation(
 ) {
     NavigationBar(
         modifier = modifier,
-        containerColor = colorResource(R.color.navbar_container)
+        containerColor = MaterialTheme.colorScheme.secondary
     ) {
         val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
@@ -45,7 +46,7 @@ fun BottomNavigation(
                 },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = colorResource(id = R.color.navbar_indicator),
-                    selectedIconColor = colorResource(R.color.navbar_selected_icon)
+                    selectedIconColor = MaterialTheme.colorScheme.primary
                 )
             )
         }

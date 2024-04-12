@@ -14,12 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.cleverlycode.creartivity.R
 
 @Composable
 fun InputText(
@@ -36,8 +34,8 @@ fun InputText(
     shape: Shape = CircleShape,
     singleLine: Boolean = true,
     colors: TextFieldColors = TextFieldDefaults.colors(
-        unfocusedContainerColor = colorResource(id = R.color.navbar_container),
-        focusedContainerColor = colorResource(id = R.color.navbar_container),
+        unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+        focusedContainerColor = MaterialTheme.colorScheme.secondary,
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent
     )

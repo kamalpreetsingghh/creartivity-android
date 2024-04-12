@@ -5,10 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     },
-                    containerColor = colorResource(id = R.color.orange_background)
+                    containerColor = MaterialTheme.colorScheme.background
                 ) {
                     NavigationGraph(
                         navController = navController,

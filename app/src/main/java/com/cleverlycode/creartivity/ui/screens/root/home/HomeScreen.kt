@@ -8,11 +8,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,7 +50,7 @@ fun HomeScreen(
 
         Surface(
             modifier = Modifier.weight(1f),
-            color = colorResource(id = R.color.orange_background)
+            color = MaterialTheme.colorScheme.background
         ) {
             LazyColumn {
                 items(images) {
@@ -59,7 +59,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 12.dp),
-                        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.navbar_container))
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary)
                     )
                 }
             }
