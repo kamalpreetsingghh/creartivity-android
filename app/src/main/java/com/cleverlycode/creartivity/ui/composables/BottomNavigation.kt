@@ -2,6 +2,7 @@ package com.cleverlycode.creartivity.ui.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
@@ -66,5 +67,11 @@ sealed class BottomNavItem(
         name = "PROFILE",
         route = "profile",
         icon = Icons.Default.Person
+    )
+
+    data object AIStudio : BottomNavItem(
+        name = "AISTUDIO",
+        route = "aistudio",
+        icon = Icons.Default.Add
     )
 }

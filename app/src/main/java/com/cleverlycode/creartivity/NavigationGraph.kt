@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.cleverlycode.creartivity.ui.composables.BottomNavItem
 import com.cleverlycode.creartivity.ui.screens.auth.login.LoginScreen
 import com.cleverlycode.creartivity.ui.screens.auth.signup.SignUpScreen
+import com.cleverlycode.creartivity.ui.screens.root.aistudio.AIStudioScreen
 import com.cleverlycode.creartivity.ui.screens.root.home.HomeScreen
 import com.cleverlycode.creartivity.ui.screens.root.profile.ProfileScreen
 
@@ -37,6 +39,10 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier) {
 
         composable(route = Profile.route) {
             ProfileScreen(navController = navController)
+        }
+
+        composable(route = BottomNavItem.AIStudio.route) {
+            AIStudioScreen(navController = navController)
         }
     }
 }

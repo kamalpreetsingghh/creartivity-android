@@ -26,17 +26,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             CreartivityTheme {
                 val navController = rememberNavController()
-                val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+                val currentDestination =
+                    navController.currentBackStackEntryAsState().value?.destination
 
                 val navbarItems = listOf(
                     BottomNavItem.Post,
+                    BottomNavItem.AIStudio,
                     BottomNavItem.Profile
                 )
 
                 Scaffold(
                     bottomBar = {
                         if (currentDestination != null) {
-                            if (currentDestination.route == "home" || currentDestination.route == "profile") {
+                            if (currentDestination.route == "home" || currentDestination.route == "profile" || currentDestination.route == "aistudio") {
                                 BottomNavigation(
                                     navbarItems = navbarItems,
                                     navController = navController
